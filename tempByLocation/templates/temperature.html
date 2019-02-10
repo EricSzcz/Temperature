@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark mb-4">
+        <h1 class="navbar-brand"><b> OnSign TV Temperature </b></h1>
+    </nav>
+    <div class="container">
+    <main role="main" class="container">
+        <div class="container">
+            <h3> Find Temperature For Location </h3>
+        </div>
+        <div class="container">
+            <form method="post" action="{% url 'show-temperature' %}">
+                <div class="form-group">
+                    {% csrf_token %}
+                    <label for="location">Location</label><br>
+                    <input id="location" type="text" name="location" class="form-control" value="{{ location }}">
+                    <label> You can enter any type of content, such as name of the city or zipcode </label>
+                    <br>
+                    <button id="show_temperature" type="submit" class="btn btn-primary">Show temperature</button><br>
+                </div>
+            </form>
+        </div>
+        <div class="container" style="width: 50%;">
+            {%if temperature %}
+                <label><h3> Temperature at {{ location_name }} is <b>{{ temperature }}&#x2103; </b></h3></label>
+            {% endif %}
+        </div>
+    </main>
+    </div>
+</body>
+{% endblock %}
